@@ -18,8 +18,12 @@ seoulTimeElement.innerHTML = moment().tz("Asia/Seoul").format("h:mm:ss [<small>]
 setInterval(updateTime, 1000)
 
 function updateCity(event){
+  
     let cityTimeZone = event.target.value;
-    let cityTime = cityTimeZone.replace("_"," ").split[1];
+    if(cityTimeZone === "current"){
+    cityTimeZone = moment.tz.guess();
+    }
+    let cityTime = cityTimeZone.replace("_"," ").split("/")[1];
     let cityDate = moment().tz(cityTimeZone);
 
 
@@ -27,7 +31,7 @@ function updateCity(event){
     citiesELement.innerHTML = `
       <div class="city">
         <div>
-          <h2>${cityTimeZone}</h2>
+          <h2>${cityTime}</h2>
           <div class="date">${cityDate.format("dddd, MMMM Do YYYY")}</div>
         </div>
         <div class="time">${cityDate.format("hh:mm:ss")} <small>${cityDate.format("A")}</small></div>
